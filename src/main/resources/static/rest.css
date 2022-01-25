@@ -1,0 +1,17 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: #252525;
+    text-align: center;
+}
+ a {
+               text-decoration: none;
+               color: slateblue;
+               font-weight: 700;
+               font-size: 16px;
+               line-height: 60px;
+}
+
+a:hover {
+           text-decoration: underline;
+           color: silver;
+ }
