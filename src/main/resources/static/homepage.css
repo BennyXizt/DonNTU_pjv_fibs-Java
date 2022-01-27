@@ -5,7 +5,7 @@ body {
 
 header,
 section {
-    width: 1200px;
+    width: 1000px;
     margin: 0 auto;
 }
 
@@ -21,7 +21,7 @@ header  a {
                text-decoration: none;
                color: slateblue;
                font-weight: 700;
-               font-size: 16px;
+               font-size: 20px;
                line-height: 60px;
 }
 
@@ -29,3 +29,7 @@ header a:hover {
            text-decoration: underline;
            color: silver;
        }
+
+section h1 {
+    text-align: center;
+}

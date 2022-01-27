@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
-public interface StudentRepository extends CrudRepository<Student, Long> {
+public interface StudentRepository extends JpaRepository<Student, Long> {
+    @Query(value = "SELECT * FROM student WHERE surname LIKE ?1", nativeQuery = true)
+    List<Student> findBySurnameLike(String surname);
 
 }

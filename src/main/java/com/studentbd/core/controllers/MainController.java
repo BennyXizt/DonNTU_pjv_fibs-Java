@@ -26,7 +26,7 @@ public class MainController {
     @GetMapping("/")
     public String home(Model model) {
 
-        model.addAttribute("title", "Main page");
+        model.addAttribute("title", "Главная страница");
         return "homepage";
     }
 
@@ -35,21 +35,29 @@ public class MainController {
         List<Student> students = service.listAll();
 
         model.addAttribute("students", students);
-        model.addAttribute("title", "Main page");
+        model.addAttribute("title", "Список данных в БД");
         return "showData";
     }
 
     @GetMapping("/generate")
     public String generate(Model model) {
         service.generate();
-        model.addAttribute("title", "Main page");
+        model.addAttribute("title", "Генерация данных");
         return "generateData";
     }
 
     @GetMapping("/firstTask")
     public String task1(Model model) {
         service.softDeleteNotFibbs();
-        model.addAttribute("title", "Main page");
+        model.addAttribute("title", "Задание №1");
         return "firstTask";
+    }
+
+    @GetMapping("/secondTask")
+    public String task2(Model model) {
+        List<Student> students =  service.findAllSurnamesThatsStartsWith("M");
+        model.addAttribute("students", students);
+        model.addAttribute("title", "Задание №2");
+        return "secondTask";
     }
 }

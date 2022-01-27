@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class StudentService {
@@ -37,19 +38,31 @@ public class StudentService {
 
     @Transactional
     public void softDeleteNotFibbs() {
-        List<Integer> notFibbs = getNotFibbs();
-        for(int i = 0; i < notFibbs.size(); i++) {
-            Student s = new Student();
-            s.setId((long)notFibbs.get(i));
-            s.set_deleted(true);
-            db.save(s);
+        List<Long> notFibbs = getNotFibbs();
+        for(int i = 1; i <= db.count(); i++) {
+            Optional<Student> optional = db.findById((long)i);
+            if(optional.isPresent())
+            {
+                Student s = optional.get();
+                if(notFibbs.indexOf(s.getId()) != -1) {
+                    s.set_deleted(true);
+                    db.save(s);
+                }
+            }
         }
     }
 
-    private List<Integer> generateFibbs() {
-        List<Integer> fibbs = new ArrayList<>();
-        fibbs.add(0);
-        fibbs.add(1);
+    @Transactional
+    public List<Student> findAllSurnamesThatsStartsWith(String value) {
+        // Starts -> text% || Ends -> %text || Any -> %text%
+        value = value + "%";
+        return db.findBySurnameLike(value);
+    }
+
+    private List<Long> generateFibbs() {
+        List<Long> fibbs = new ArrayList<>();
+        fibbs.add((long)0);
+        fibbs.add((long)1);
         for(int i = 0; i < db.count() / 10; i++)
         {
             fibbs.add(fibbs.get(fibbs.size() - 1) + fibbs.get(fibbs.size() - 2));
@@ -58,11 +71,11 @@ public class StudentService {
         fibbs.remove(0);
         return fibbs;
     }
-    private List<Integer> getNotFibbs() {
-        List<Integer> fibbs = generateFibbs();
-        List<Integer> notFibbs = new ArrayList<>();
+    private List<Long> getNotFibbs() {
+        List<Long> fibbs = generateFibbs();
+        List<Long> notFibbs = new ArrayList<>();
         for(int i = 1; i < db.count() + 1; i++) {
-            notFibbs.add(i);
+            notFibbs.add((long)i);
         }
         for(int i = 0; i < fibbs.size(); i++) {
             if(notFibbs.indexOf(fibbs.get(i)) != -1)

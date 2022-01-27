@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="homepage.css">
-    <title>Title</title>
+    <title>[[${title}]]</title>
 </head>
 <body>
     <header>
@@ -12,15 +12,21 @@
             <ul>
                 <li><a th:href="@{/generate}">Сгенерировать значения</a></li>
                 <li><a th:href="@{/students}">Показать Таблицу</a></li>
-                <li><a th:href="@{/firstTask}">Удалить ID, значения которых не являются числом Фибоначчи</a></li>
-                <li><a href="">Задание 2</a></li>
+                <li><a th:href="@{/firstTask}">Задание №1</a></li>
+                <li><a th:href="@{/secondTask}">Задание №2</a></li>
             </ul>
         </nav>
     </header>
     <section>
-        <h1>Вариант № - Специально для Одесского</h1>
-        <h2>Задание 1 - </h2>
-        <h2>Задание 2 - </h2>
+        <h1>Вариант №13 - Специально для ДонНТУ</h1>
+        <article>
+            <h2>Задание 1</h2>
+            <p>Удалить ID, значения которых не являются числом Фибоначчи</p>
+        </article>
+        <article>
+            <h2>Задание 2</h2>
+            <p>Найти все значения, surname которых начинается с буквы M</p>
+        </article>
     </section>
 </body>
 </html>
